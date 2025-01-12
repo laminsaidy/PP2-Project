@@ -4,56 +4,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--Font awesome-->
+    <!-- Font Awesome for better font styling -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Google Fonts for custom font 'Oswald' -->
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <!-- External CSS for game styling -->
     <link rel="stylesheet" href="assets/css/style.css">
     <title>Rock Paper Scissors Lizard Spock Game</title>
 </head>
 
 <body>
     <div class="container">
+        <!-- Header with the game title -->
         <h1>Welcome to my RPSLS Game!</h1>
+
+        <!-- Input field for the player to enter their name -->
         <input type="text" id="username" placeholder="Enter your name">
+
+        <!-- Button to start the game, triggers startGame function -->
         <button onclick="startGame()" id="playgame">Start Game</button>
+
+        <!-- Instructions section to display player instructions after starting -->
         <div id="instructions"></div>
+
+        <!-- Choices section where the player can select their move -->
         <div id="choices">
             <button class="choice" value="rock">Rock</button>
             <button class="choice" value="paper">Paper</button>
-            <button class="choice" value="scissors">Scissors</button> 
+            <button class="choice" value="scissors">Scissors</button>
             <button class="choice" value="lizard">Lizard</button>
             <button class="choice" value="spock">Spock</button>
         </div>
+
+        <!-- Section to display round results such as computer's choice and the result -->
         <div id="round-result">
             <p id="computer-choice"></p>
             <p id="result-text"></p>
         </div>
+
+        <!-- Scoreboard to display the current scores -->
         <div id="scoreboard">
             <div id="player-score">Player Score: 0</div>
             <div id="computer-score">Computer Score: 0</div>
         </div>
+
+        <!-- Section to show final game result -->
         <div id="game-result"></div>
         
+        <!-- Play Again button, initially hidden -->
         <button id="playAgainBtn" style="display:none;">Play Again</button>
-        <a href="index.html" id="backToMainPageBtn">Return to Main Page</a>
 
+        <!-- Link to return to the main page -->
+        <a href="index.html" id="backToMainPageBtn">Return to Main Page</a>
     </div>
+
+    <!-- Container for displaying past game scores -->
     <div class="past-scores-container">
         <table class="past-scores-table">
-            <tbody></tbody> <!-- Added tbody for the table -->
+            <tbody></tbody> <!-- Table body where past scores will be dynamically inserted -->
         </table>
     </div>
     
-    <!--Footer-->
+    <!-- Footer section with copyright information and designer link -->
     <footer>
         <div class="footer">
-            <p>Copy right &copy;2024; Designed by <span class="creator"><a href="https://github.com/laminsaidy/PP2"
-                        target="_blank">Lamin Saidy</a></span></p>
-        </div>
-    </footer>
-
-    <script src="assets/js/script.js"></script>
-</body>
-
-</html>
+            <p>Copy right &copy;2024; Designed by <span class="creator"><a href="https://github.com/lamins
