@@ -1,34 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <!-- Meta tags for character set, compatibility, and viewport settings -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Font Awesome for better font styling -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Google Fonts for custom font 'Oswald' -->
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
-    <!-- External CSS for game styling -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width-device-width, initial-scale=1.0">
+    
+    <!-- Meta tags for description and keywords -->
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    
+    <!-- Title of the page -->
+    <title>RPSLS Game</title>
+    
+    <!-- Linking the external stylesheet -->
     <link rel="stylesheet" href="assets/css/style.css">
-    <title>Rock Paper Scissors Lizard Spock Game</title>
 </head>
-
 <body>
+    <!-- Main container for the game -->
     <div class="container">
-        <!-- Header with the game title -->
-        <h1>Welcome to my RPSLS Game!</h1>
-
-        <!-- Input field for the player to enter their name -->
+        <!-- Game header -->
+        <h1>Welcome to RPSLS Game!</h1>
+        
+        <!-- Input field for username -->
         <input type="text" id="username" placeholder="Enter your name">
-
-        <!-- Button to start the game, triggers startGame function -->
+        
+        <!-- Button to start the game -->
         <button onclick="startGame()" id="playgame">Start Game</button>
-
-        <!-- Instructions section to display player instructions after starting -->
+        
+        <!-- Instructions text that will be updated -->
         <div id="instructions"></div>
-
-        <!-- Choices section where the player can select their move -->
+        
+        <!-- Buttons for player's choice (Rock, Paper, Scissors, Lizard, Spock) -->
         <div id="choices">
             <button class="choice" value="rock">Rock</button>
             <button class="choice" value="paper">Paper</button>
@@ -36,37 +39,54 @@
             <button class="choice" value="lizard">Lizard</button>
             <button class="choice" value="spock">Spock</button>
         </div>
-
-        <!-- Section to display round results such as computer's choice and the result -->
+        
+        <!-- Display for the round result -->
         <div id="round-result">
             <p id="computer-choice"></p>
             <p id="result-text"></p>
         </div>
-
-        <!-- Scoreboard to display the current scores -->
+        
+        <!-- Scoreboard for player and computer scores -->
         <div id="scoreboard">
             <div id="player-score">Player Score: 0</div>
             <div id="computer-score">Computer Score: 0</div>
         </div>
-
-        <!-- Section to show final game result -->
+        
+        <!-- Final game result display -->
         <div id="game-result"></div>
         
-        <!-- Play Again button, initially hidden -->
+        <!-- Button to play again, initially hidden -->
         <button id="playAgainBtn" style="display:none;">Play Again</button>
-
+        
         <!-- Link to return to the main page -->
-        <a href="index.html" id="backToMainPageBtn">Return to Main Page</a>
+        <a href="index.html" id="backToMainPageBtn">Back to Main Page</a>
     </div>
-
-    <!-- Container for displaying past game scores -->
+    
+    <!-- Container for displaying past scores -->
     <div class="past-scores-container">
-        <table class="past-scores-table">
-            <tbody></tbody> <!-- Table body where past scores will be dynamically inserted -->
+        <h3>Best Scores</h3>
+        <table id="past-scores-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Player Score</th>
+                    <th>Computer Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Scores will be dynamically added here -->
+            </tbody>
         </table>
     </div>
     
-    <!-- Footer section with copyright information and designer link -->
+    <!-- Footer with copyright and designer credit -->
     <footer>
-        <div class="footer">
-            <p>Copy right &copy;2024; Designed by <span class="creator"><a href="https://github.com/lamins
+        <div class="footercontainer">
+            <p>Copy right &copy;2024; Designed by <span class="designer"><a href="https://github.com/laminsaidy/PP2-Project" target="_blank">Lamin</a></span></p>
+        </div>
+    </footer>
+    
+    <!-- Linking the external JavaScript file -->
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

@@ -1,77 +1,83 @@
-// Initialize the game state variables
+// Initializing variables for the game state
 let playerScore = 0;  // Player's score
 let computerScore = 0;  // Computer's score
-let playerChoices = ['rock', 'paper', 'scissors', 'lizard', 'spock'];  // List of possible player choices
-let computerChoices = [...playerChoices];  // Copy of player choices for computer
-let playerSelection;  // Store the player's selection
-let computerSelection;  // Store the computer's selection
-let roundsPlayed = 0;  // Count the number of rounds played
-let maxRounds = 5;  // Maximum rounds to play
+let playerChoices = ['rock', 'paper', 'scissors', 'lizard', 'spock'];  // List of player's available choices
+let computerChoices = [...playerChoices];  // Copy of playerChoices for the computer's choices
+let playerSelection;  // Variable to store the player's selection
+let computerSelection;  // Variable to store the computer's selection
+let roundsPlayed = 0;  // Track the number of rounds played
+let maxRounds = 5;  // Set the maximum number of rounds
 
-// Hide the choices container initially
+// Hiding the choices container initially and clearing the scoreboard
 const choicesContainer = document.getElementById('choices');
 choicesContainer.style.display = 'none';
-// Reset the scores display
 document.getElementById('player-score').textContent = '';
 document.getElementById('computer-score').textContent = '';
 
-// Function to start the game
+// Start game function
 function startGame() {
     const usernameInput = document.getElementById('username');
     
-    // Check if the username is empty
+    // Check if the player has entered a name
     if (usernameInput.value.trim() === '') {
-        alert('Please enter your name.');  // Alert if name is missing
+        alert('Please enter your name.');
         return;
     }
 
-    // Store the player's name in local storage and update the instructions
+    // Store the player's name in local storage
     const username = usernameInput.value;
     localStorage.setItem('playerName', username);
+    
+    // Display welcome message and instructions
     document.getElementById('instructions').innerHTML = `<strong>Welcome, ${username}!</strong><br>Please choose your move.`;
     
-    // Show game UI elements after starting the game
+    // Show the choices container and scoreboard
     choicesContainer.style.display = 'block';
     document.getElementById('scoreboard').style.display = 'block';
-    document.getElementById('playAgainBtn').style.display = 'none';
+    document.getElementById('playAgainBtn').style.display = 'none';  // Hide play again button initially
     document.getElementById('player-score').textContent = 'Player Score: 0';
-    document.getElementById('computer-score').textContent = 'Computer Score: 0';
+    document.getElementById('computer-score').textContent ='Computer Score: 0';
+    
+    // Hide the username and start game button
     document.getElementById('username').style.display = 'none';
     document.getElementById('playgame').style.display = 'none';
-   
-    showPastScores();  // Show past scores from local storage
+    
+    // Display past scores from local storage
+    showPastScores();
 }
 
-// When the page loads, populate username input if stored in localStorage
+// Load stored username when the page loads
 window.onload = function() {
     const storedUsername = localStorage.getItem('playerName');
     if (storedUsername) {
-        document.getElementById('username').value = storedUsername;
+        document.getElementById('username').value = storedUsername;  // Auto-fill the username field if found
     }
-    showPastScores();  // Show past scores when the game page loads
+    showPastScores();  // Display past scores on page load
 };
 
-// Add event listeners for each player's choice
+// Add event listener to each choice button
 document.querySelectorAll('.choice').forEach(button => {
     button.addEventListener('click', () => {
-        playerSelection = button.value;  // Set player selection
-        computerSelection = computerChoices[Math.floor(Math.random() * computerChoices.length)];  // Randomly select computer's move
-        playRound();  // Play a round with the selected choices
+        playerSelection = button.value;  // Store the player's selection
+        computerSelection = computerChoices[Math.floor(Math.random() * computerChoices.length)];  // Randomly choose for the computer
+        playRound();  // Start the round
     });
 });
 
-// Function to play a round and determine the winner
+// Function to play a round
 function playRound() {
-    let result = determineWinner(playerSelection, computerSelection);  // Determine round winner
-    updateScores(result);  // Update scores based on the round result
-    displayRoundResult(result);  // Display the round's result
-    checkGameOver();  // Check if the game is over after the round
+    let result = determineWinner(playerSelection, computerSelection);  // Determine the winner of the round
+    updateScores(result);  // Update the scores based on the round result
+    displayRoundResult(result);  // Display the result of the round
+    checkGameOver();  // Check if the game is over
 }
 
-// Function to determine the winner between player and computer
+// Function to determine the winner of a round
 function determineWinner(player, computer) {
-    if (player === computer) return 'draw';  // If both choices are the same, it's a draw
-    // Check for all winning conditions
+    // Draw condition: if both selections are the same
+    if (player === computer) return 'draw';
+
+    // Winning conditions for the player
     if ((player === 'rock' && computer === 'scissors') ||
         (player === 'paper' && computer === 'rock') || 
         (player === 'scissors' && computer === 'paper') || 
@@ -85,73 +91,78 @@ function determineWinner(player, computer) {
     {
         return 'player';  // Player wins
     }
+
     return 'computer';  // Computer wins
 }
 
-// Function to update the scores
+// Function to update the scores after each round
 function updateScores(winner) {
     if (winner === 'player') {
-        playerScore++;  // Increment player's score
+        playerScore++;  // Increment player score
     } else if (winner === 'computer') {
-        computerScore++;  // Increment computer's score
+        computerScore++;  // Increment computer score
     }
-    // Update score displays
+    
+    // Update score display on the page
     document.getElementById('player-score').textContent = `Player Score: ${playerScore}`;
     document.getElementById('computer-score').textContent = `Computer Score: ${computerScore}`;
 }
 
-// Function to display the round result
+// Function to display the result of the round
 function displayRoundResult(result) {
     document.getElementById('computer-choice').textContent = `Computer chose: ${computerSelection}`;
-    document.getElementById('result-text').innerHTML = `Result: ${result === 'draw' ? 'It\'s a draw!' : result === 'player' ? 'You win this round!' : 'You lose this round!'}`;
+    document.getElementById('result-text').innerHTML = `Result: ${result === 'draw'? 'It\'s a draw!' : result === 'player'? 'You win this round!' : 'You lose this round!'}`;
 }
 
-// Function to check if the game is over after a round
+// Function to check if the game is over (after the max rounds)
 function checkGameOver() {
-    roundsPlayed++;  // Increment the number of rounds played
-    if (roundsPlayed >= maxRounds) {  // If max rounds are reached
-        // Save the scores in local storage
-        const scores = JSON.parse(localStorage.getItem('scores') || '[]');
-        scores.push({ playerName: localStorage.getItem('playerName'), playerScore, computerScore });
-        scores.sort((a, b) => b.playerScore - a.playerScore);  // Sort scores by player score
-        localStorage.setItem('scores', JSON.stringify(scores.slice(0, 5)));  // Store top 5 scores
-        // Hide choices and display game over result
+    roundsPlayed++;  // Increment the rounds played
+    if (roundsPlayed >= maxRounds) {  // Check if maximum rounds are reached
+        const scores = JSON.parse(localStorage.getItem('scores') || '[]');  // Retrieve past scores from local storage
+        scores.push({ playerName: localStorage.getItem('playerName'), playerScore, computerScore });  // Add the current game scores
+        scores.sort((a, b) => b.playerScore - a.playerScore);  // Sort the scores by player score
+        localStorage.setItem('scores', JSON.stringify(scores.slice(0, 5)));  // Store the top 5 scores in local storage
+        
+        // Hide the choices and show the game over result
         document.getElementById('choices').style.display = 'none';
-        document.getElementById('game-result').innerHTML = `<strong>Game Over!</strong><br>Player Score: ${playerScore}<br>Computer Score: ${computerScore}<br><br>Final Result: ${playerScore > computerScore ? 'You won the game!' : playerScore < computerScore ? 'You lost the game.' : 'The game was a draw.'}`;
-        document.getElementById('playAgainBtn').style.display = 'block';  // Show play again button
+        document.getElementById('game-result').innerHTML = `<strong>Game Over!</strong><br>Player Score: ${playerScore}<br>Computer Score: ${computerScore}<br><br>Final Result: ${playerScore > computerScore? 'You won the game!' : playerScore < computerScore? 'You lost the game.' : 'The game was a draw.'}`;
+        
+        // Show play again button
+        document.getElementById('playAgainBtn').style.display = 'block';
     }
 }
 
-// Event listener for play again button to reset the game
+// Add event listener to the play again button to reset the game
 document.getElementById('playAgainBtn').addEventListener('click', () => {
-    playerScore = 0;
+    playerScore = 0;  // Reset scores
     computerScore = 0;
-    roundsPlayed = 0;
-    location.reload();  // Reload the page to reset the game
+    roundsPlayed = 0;  // Reset rounds played
+    location.reload();  // Reload the page to start a new game
 });
 
-// Event listener for back to main page button to redirect to index.html
+// Add event listener to the back to main page button
 document.getElementById('backToMainPageBtn').addEventListener('click', () => {
-    window.location.href = "index.html";  // Redirect to main page
+    window.location.href = "index.html";  // Redirect to the main page
 });
 
-// Function to show past scores from local storage
+// Function to display the past scores from local storage
 function showPastScores() {
-    const scoresStr = localStorage.getItem('scores');
+    const scoresStr = localStorage.getItem('scores');  // Get stored scores
     if (!scoresStr) {
-        console.error("No scores found in local storage.");
+        console.error("No scores found in local storage.");  // Error if no scores are found
         return;
     }
-    const scoresArr = JSON.parse(scoresStr);  // Parse stored scores
-
+    
+    const scoresArr = JSON.parse(scoresStr);  // Parse the scores string to an array
     console.log("Retrieved scores:", scoresArr);  // Log retrieved scores
 
-    scoresArr.sort((a, b) => b.playerScore - a.playerScore);  // Sort scores in descending order
+    scoresArr.sort((a, b) => b.playerScore - a.playerScore);  // Sort the scores by player score in descending order
 
+    // Get the table body for displaying scores
     const scoresTableBody = document.querySelector('#past-scores-table tbody');
-    scoresTableBody.innerHTML = '';  // Clear the table body before adding new rows
+    scoresTableBody.innerHTML = '';  // Clear any existing scores
 
-    // Add each score as a new row in the scores table
+    // Add each score to the table
     scoresArr.forEach(scoreObj => {
         scoresTableBody.innerHTML += `
             <tr>
