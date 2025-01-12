@@ -291,3 +291,35 @@ body {
     background-color: darkolivegreen;
     color: white;
 }
+
+/* General styling for the 404 error page */
+.error-container {
+    text-align: center;
+    padding: 50px;
+    font-family: Arial, sans-serif;
+}
+
+.error-container h1 {
+    font-size: 5rem;
+    color: #ff6b6b;
+}
+
+.error-container p {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: white;
+    background-color: #007bff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.back-link:hover {
+    background-color: #0056b3;
+}
