@@ -86,7 +86,8 @@ body {
     color: white;
 }
 
-.container.choice {
+/* Updated choice button styles */
+#choices .choice {
     margin: 10px;
     padding: 10px 20px;
     font-size: 18px;
@@ -105,7 +106,7 @@ body {
 }
 
 /* Return to main page button styles */
-#returntomainpagebtn {
+#backToMainPageBtn {
     background-color: darkblue;
     color: rgb(252, 249, 249);
     display: inline-block;
@@ -118,7 +119,7 @@ body {
     margin-bottom: 30px;
 }
 
-#returntomainpagebtn:hover {
+#backToMainPageBtn:hover {
     background-color: darkslategray;
     color: white;
 }
@@ -151,6 +152,25 @@ body {
     line-height: 1.5rem;
     margin-bottom: 20px;
     text-align: center;
+}
+
+/* Play again button styles */
+#playAgainBtn {
+    background-color: darkgreen;
+    color: rgb(252, 249, 249);
+    display: inline-block;
+    font-size: 20px;
+    border-radius: 12px;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    transition-duration: 0.5s;
+    margin-bottom: 30px;
+}
+
+#playAgainBtn:hover {
+    background-color: darkolivegreen;
+    color: white;
 }
 
 /* Media Queries */
@@ -271,55 +291,4 @@ body {
         font-size: 0.8rem;
         max-width: 90%;
     }
-}
-
-/* Play again button styles */
-#playAgainBtn {
-    background-color: darkgreen;
-    color: rgb(252, 249, 249);
-    display: inline-block;
-    font-size: 20px;
-    border-radius: 12px;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    transition-duration: 0.5s;
-    margin-bottom: 30px;
-}
-
-#playAgainBtn:hover {
-    background-color: darkolivegreen;
-    color: white;
-}
-
-/* General styling for the 404 error page */
-.error-container {
-    text-align: center;
-    padding: 50px;
-    font-family: Arial, sans-serif;
-}
-
-.error-container h1 {
-    font-size: 5rem;
-    color: #ff6b6b;
-}
-
-.error-container p {
-    font-size: 1.5rem;
-    color: #333;
-}
-
-.back-link {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 1rem;
-    color: white;
-    background-color: #007bff;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
-.back-link:hover {
-    background-color: #0056b3;
 }
