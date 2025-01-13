@@ -1,6 +1,6 @@
 {
-    "name": "",
-    "short_name": "",
+    "name": "RPSLS Game",
+    "short_name": "RPSLS",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
